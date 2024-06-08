@@ -1,2 +1,10 @@
 compareFilesGUI/
 .vscode/
+*.csv
+bin/
+dist/
+build/
+include/
+lib/
+*.spec
+*.cfg
