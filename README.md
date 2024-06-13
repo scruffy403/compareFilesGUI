@@ -1,37 +1,27 @@
 
 # Python Scripts for File Comparisons
 
-This repo has two different script for comparing files. 
+## Scripts
+- **`gui_find_unique_data.py`**:
+    A script to compate two files, assuming the second file has additonal date, and produce a new file with the rows of data unique to the second file. 
+    *This tool has its own GUI*
 
-## identify_differences.py 
-This will take two files and produces two outputs. The first is a file that the user can choose a name for in the GUI, for example `output_file.csv`
-This file will show differences between the files within the cells of the output file so the user can locate differences in the original files if needed.   
-A second file will be produced that provides summary data of the differences. The file name of this will prepend `summary` to the user selected file name, ie., `summary_output_file.csv`  
-See below for more details about usage. Some information is also available when you are using hte GUI.  
+- **`identify_differences.py`**:
+    Compares two files and produces two output files. The first file (the user selects the name) shows differences in each cell of the file if differences are found in a cell of the input files.  
+    The second file is a summary file (`summary` is prepended to the user output file name) that provides a summary of today differences per column name and some other details.  
+    *This tool has its own GUI*
 
+- **`find_unique_data.py`**:
+    A command line implemntation similar to `find_unique_data_tool.py`. This was the initial implementation of the `gui_find_unique_data.py` logic and would need to be updated to reflect the changes to the GUI app in order to have the same function as a command line tool.
 
-## Roadmap
-
-- Additional browser support
-
-- Add more integrations
-
-
-## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+- **`check_environment.py`**:
+    This tool is being developed to check that a suitable version of Python is installed and if so set up a virtual environment and then install the dependencies listed in `requirements.txt`.  
+    *This is a command line script*
 
 
-## Tech Stack
-
-**Client:** React, Redux, TailwindCSS
-
-**Server:** Node, Express
-
-
-## Documentation
-# Find Unique Data
-## Description of `gui_find_unique_data.py` 
+# Documentation
+## Find Unique Data
+### Description of `gui_find_unique_data.py` 
 
 The Find Unique Data Tool is a graphical user interface (GUI) application built using Python's Tkinter library. This tool allows users to compare two CSV files and identify unique records in the second file based on specified unique identifier columns. The unique records are then saved to an output CSV file.
 
@@ -41,6 +31,13 @@ The Find Unique Data Tool is a graphical user interface (GUI) application built 
 - **Customizable Output Path:** Specify the path where the output file will be saved.
 - **Informational Popup:** Define one or two columns to use as unique identifiers for the comparison.
 - **Clear Inputs for Reuse:** After running the comparison, the tool can clear inputs to allow for additional comparisons.
+
+## GUI Components
+- **Main Window:** A Tkinter window with labels, entries, and buttons for user interaction.
+- **File Path Entries:** Text entries for the paths of File 1, File 2, and the output file.
+- **Unique Identifier Entries:** Text entries for specifying unique identifier columns (Option to enter a second unique identifer column).
+- **Run Button:** A button to start the comparison process.
+- **Usage Info Button:** A button to display usage instructions.
 
 ## Requirements
 
