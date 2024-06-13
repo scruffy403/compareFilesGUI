@@ -9,6 +9,12 @@ import os
 
 
 def create_tooltip(widget, text):
+    """Creates a tooltip that appears on hover over a widget.
+
+    Args:
+        widget (tk.Widget): The widget to attach the tooltip to.
+        text (str): The text to display in the tooltip.
+    """
     def enter(event):
         tooltip = tk.Toplevel(widget)
         tooltip.wm_overrideredirect(True)
@@ -30,6 +36,20 @@ def create_tooltip(widget, text):
 
 
 def compare_files(file1, file2, output_file, id_cols, file_format="csv"):
+    """Compares two data files based on specified identifier columns.
+
+    Reads the files using pandas, sets a multi-level index based on the
+    identifier columns, merges the DataFrames, identifies differences,
+    and saves the results to separate CSV files (summary and detailed results).
+
+    Args:
+        file1 (str): The path to the first file.
+        file2 (str): The path to the second file.
+        output_file (str): The path to save the output CSV file.
+        id_cols (list): A list of column names used as identifiers.
+        file_format (str, optional): The file format of the input files.
+            Defaults to "csv".
+    """
     # Add a function to read different file formats
     def read_file(file, format):
         if format == "csv":
@@ -131,6 +151,11 @@ def compare_files(file1, file2, output_file, id_cols, file_format="csv"):
 
 
 def browse_file(entry_widget):
+    """Opens a file dialog and sets the selected path to the entry widget.
+
+    Args:
+        entry_widget (tk.Entry): The entry widget to update with the file path.
+    """
     file_path = filedialog.askopenfilename(
         filetypes=[
             ("CSV Files", "*.csv"),
@@ -145,6 +170,20 @@ def browse_file(entry_widget):
 def run_comparison(
     file1_entry, file2_entry, output_format, progress_bar, summary_text, id_cols_entry
 ):
+    """Runs the file comparison in a separate thread and updates the UI.
+
+    Gets file paths from entry widgets, prompts the user to select an
+    output file, calls the compare_files function, and updates the progress bar
+    and summary text with the results.
+
+    Args:
+        file1_entry (tk.Entry): The entry widget containing the first file path.
+        file2_entry (tk.Entry): The entry widget containing the second file path.
+        output_format (tk.StringVar): The variable storing the selected output format.
+        progress_bar (ttk.Progressbar): The progress bar widget.
+        summary_text (tk.Text): The text widget to display the summary.
+        id_cols_entry (tk.Entry): The entry widget containing the comma-separated identifier columns.
+    """
     file1_path = file1_entry.get()
     file2_path = file2_entry.get()
 
@@ -186,10 +225,21 @@ def run_comparison(
 
 
 def exit_app():
+    """Exits the application by destroying the main window."""
     root.destroy()
 
 
 def reset(file1_entry, file2_entry, output_format, progress_bar, summary_text):
+    """Resets the application by clearing entries, hiding the progress bar,
+    clearing the summary text, and resetting the status label.
+
+    Args:
+        file1_entry (tk.Entry): The entry widget containing the first file path.
+        file2_entry (tk.Entry): The entry widget containing the second file path.
+        output_format (tk.StringVar): The variable storing the selected output format.
+        progress_bar (ttk.Progressbar): The progress bar widget.
+        summary_text (tk.Text): The text widget to display the summary.
+    """
     file1_entry.delete(0, tk.END)
     file2_entry.delete(0, tk.END)
     output_format.set("csv")
@@ -199,6 +249,12 @@ def reset(file1_entry, file2_entry, output_format, progress_bar, summary_text):
 
 
 def update_progress_bar(current, total):
+    """Updates the progress bar value and percentage label.
+
+    Args:
+        current (int): The current progress value.
+        total (int): The total progress value.
+    """
     progress_percentage = (current / total) * 100
     progress_bar["value"] = progress_percentage
     progress_label.config(text=f"Progress: {progress_percentage:.1f}%")

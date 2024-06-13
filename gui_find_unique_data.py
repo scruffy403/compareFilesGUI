@@ -3,12 +3,22 @@ from tkinter import filedialog, messagebox
 import pandas as pd
 
 def browse_files(file_type, label_var):
-    """Opens a file dialog and sets the selected path to the label variable"""
+    """Opens a file dialog and sets the selected path to the label variable.
+
+    Args:
+        file_type (str): The type of file to be selected (e.g., "File 1").
+        label_var (tk.StringVar): The tkinter variable used to store the path.
+    """
     filename = filedialog.askopenfilename(title=f"Select {file_type} file")
     label_var.set(filename)
 
 def run_program():
-    """Reads data from files, performs operations, and saves the output"""
+    """Reads data from files, performs operations to find unique data, 
+       and saves the output to a new CSV file.
+
+    Displays a success message and prompts the user to continue processing 
+    more files.
+    """
     file1_path = file1_entry.get()
     file2_path = file2_entry.get()
     output_path = output_entry.get()
@@ -52,7 +62,7 @@ def run_program():
         unique_id_entry2.set("")
 
 def show_info():
-    """Displays an informational message box."""
+    """Displays an informational message box about the tool's functionality."""
     info_message = (
         "This tool assumes the second file has the unique data\n"
         "It compares two CSV files to find unique data.\n\n"
